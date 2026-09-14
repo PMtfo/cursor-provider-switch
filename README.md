@@ -153,3 +153,26 @@ curswitch status
 ## License
 
 Private / personal use.
+
+## 仓库结构
+
+当前受版本控制的文件共 11 个。仓库内不含任何明文 Key：只有 OpenSSL AES-256 密文 `config/secrets.env.enc` 与不含真值的 `config/secrets.env.example`。
+
+```
+cursor-provider-switch/
+├── README.md
+├── .gitignore                        忽略解密产物 config/secrets.env
+├── config/
+│   ├── cursor-providers.env          provider 名称与 Base URL 等非敏感配置
+│   ├── secrets.env.enc               AES-256 密文，唯一入库的密钥载体
+│   └── secrets.env.example           字段模板，无真值
+├── scripts/
+│   ├── install.sh                    安装 curswitch 命令
+│   ├── switch-cursor-provider.py     退出 Cursor → 写配置 → 重开窗口
+│   ├── env-lock.sh                   明文 → secrets.env.enc
+│   ├── env-unlock.sh                 secrets.env.enc → ~/.cursor-provider-switch/secrets.env
+│   └── import-from-hermes.sh         从 ~/.hermes/.env 导入已有 Key
+└── skill/SKILL.md                    Agent 侧调用说明
+```
+
+加密密码不写入仓库、不写入任何文件，只记在脑子里；忘记即无法恢复 `config/secrets.env.enc`，只能重新取 Key 后重做一次 `env-lock.sh`。
