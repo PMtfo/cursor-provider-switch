@@ -8,3 +8,4 @@ secrets.env
 
 # 本地安装状态（每台机器不同）
 # ~/.cursor-provider-switch/ 不在仓库内
+config/secrets.env.enc

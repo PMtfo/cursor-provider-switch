@@ -5,7 +5,7 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 BIN_DIR="${INSTALL_BIN_DIR:-$HOME/local/bin}"
 SKILL_DIR="${INSTALL_SKILL_DIR:-$HOME/.cursor/skills/cursor-provider-switch}"
-WORKSPACE="${CURSOR_DEFAULT_WORKSPACE:-$HOME/Desktop/Hermes}"
+WORKSPACE="${CURSOR_DEFAULT_WORKSPACE:-$HOME/Projects}"
 
 mkdir -p "$BIN_DIR" "$HOME/.cursor-provider-switch" "$SKILL_DIR"
 

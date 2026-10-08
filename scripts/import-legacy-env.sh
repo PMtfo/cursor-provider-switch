@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
-# 从 ~/.hermes/.env 提取 Cursor 切换所需字段到 config/secrets.env
+# 从 ~/.cursor-provider-switch/.env 提取 Cursor 切换所需字段到 config/secrets.env
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-SRC="${1:-$HOME/.hermes/.env}"
+SRC="${1:-$HOME/.cursor-provider-switch/.env}"
 DEST="$ROOT/config/secrets.env"
 
 if [[ ! -f "$SRC" ]]; then

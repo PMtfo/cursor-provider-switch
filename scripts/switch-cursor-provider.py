@@ -27,7 +27,7 @@ AUTH_KEY = "cursorAuth/openAIKey"
 CONFIG_DIR = Path.home() / ".cursor-provider-switch"
 LOCAL_ENV = REPO_ROOT / "config" / "cursor-providers.env"
 SECRETS_ENV = CONFIG_DIR / "secrets.env"
-HERMES_ENV = Path.home() / ".hermes" / ".env"
+LEGACY_ENV = Path.home() / ".cursor-provider-switch" / ".env"
 MARKER = Path.home() / ".cursor-active-provider"
 SWITCH_LOG = Path.home() / ".cursor-switch.log"
 
@@ -66,12 +66,12 @@ def default_workspace() -> Path:
         for line in cfg.read_text().splitlines():
             if line.startswith("CURSOR_DEFAULT_WORKSPACE="):
                 return Path(line.split("=", 1)[1].strip()).expanduser()
-    return Path.home() / "Desktop" / "Hermes"
+    return Path.home() / "Projects"
 
 
 def load_dotenv_files() -> dict[str, str]:
     merged: dict[str, str] = {}
-    for path in (SECRETS_ENV, HERMES_ENV, LOCAL_ENV):
+    for path in (SECRETS_ENV, LEGACY_ENV, LOCAL_ENV):
         if not path.exists():
             continue
         for line in path.read_text().splitlines():
@@ -92,7 +92,7 @@ def resolve_value(keys: tuple[str, ...], dotenv: dict[str, str], default: str | 
     if default is not None:
         return default
     raise SystemExit(
-        f"缺少密钥。请先运行 env-unlock.sh，或写入 {SECRETS_ENV} / {HERMES_ENV}：{', '.join(keys)}"
+        f"缺少密钥。请先运行 env-unlock.sh，或写入 {SECRETS_ENV} / {LEGACY_ENV}：{', '.join(keys)}"
     )
 
 
